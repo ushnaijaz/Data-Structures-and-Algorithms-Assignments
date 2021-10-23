@@ -42,6 +42,6 @@ Questions from the book *“Introduction to Algorithms by Cormen”* <br >
 -Queue Functions <br >
 
 ### LAB 9 TASKS
--BFS DFS
+-BFS DFS <br >
 -Graphs
 
