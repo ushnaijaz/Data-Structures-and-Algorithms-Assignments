@@ -1,106 +1,271 @@
-\documentclass[10pt]{article} 
-\usepackage[margin=2cm]{geometry}
-\usepackage{tikz}  
+\documentclass[12pt]{article} 
 
 \begin{document}
 
-\title{\textbf{LAB 9 TASK}}
-
-\author{(Ushna Ijaz-2019-CE-39)}
+\title{Lab 3 Assignment [Ushna Ijaz- 2019-CE-39]}
 \maketitle
 
-\part*{Pre-Lecture Exercises }
+\section{Question 4.3.1}
+Show that the solution of $T(n) = T(n - 1) + n$ is $O(n^2)$\\ 
 
-\section*{Question 1}
-What algorithmic problem about graphs do we need to solve in order to solve the following
-problems? (Note, you do not actually have to solve these problems, just transform them into graph
-problems that we might then be able to solve).\\
-1. Among actors, a “Bacon number" is the number of degrees of separation from an actor to
-Kevin Bacon. For example, Kevin Bacon’s Bacon number is 0. If an actor works in a movie
-with Kevin Bacon, the actor’s Bacon number is 1. If an actor A works with an actor B who
-worked with Kevin Bacon in a movie, then actor A’s Bacon number is 2, and so forth.\\
-(a) What is Samuel L. Jackson’s Bacon number?\\
-(b) list all the people with Bacon number equal to 6. 
+Answer: 
 
+We know $T(n) \le cn^2$ for some value of c\\
+$T(n) \le c(n-1)^2 + n$ \\
+$T(n) \le cn^2 - 2cn + c + n $
 
-\section*{Answer}
+Taking c = 1, we get\\
+$ n^2 - 2n + 1 + n $ \\
+$ n^2 - n + 1 \le n^2 $ for $n \ge 1$ \\
+$c \ge 1$
 
-\begin{tikzpicture}  
-  [scale=.9,auto=center,every node/.style={circle,fill=blue!20}]  
-    
-  \node (a1) at (1,2) {A};  
-  \node (a2) at (2,5)  {B}; 
-  \node (a3) at (3,7)  {C};  
-  \node (a4) at (3,2.5) {D};  
-  \node (a5) at (5,6)  {E};  
-  \node (a6) at (5,3)  {F};  
-   
-  
-  \draw (a1) -- (a2); 
-  \draw (a2) -- (a3);  
-  \draw (a2) -- (a4);  
-  \draw (a4) -- (a6);  
-  \draw (a3) -- (a5);  
-  \draw (a1)-- (a4);
-  \draw (a5) -- (a6);
-  \draw (a3) -- (a6);
-   
-  
-\end{tikzpicture}  
+\section{Question 4.3.2}
+Question: Show that the solution of $T(n) = T(\lceil n / 2 \rceil) + 1$ is $O(\lg n)$ \\
 
-\begin{center}
- \begin{tabular}{||c c ||} 
- \hline
- Vertex & Degree  \\ [0.5ex]  
- \hline
- A & 4 \\
- \hline
- B & 3 \\
- \hline
- C & 3  \\
- \hline
- D & 2 \\ 
- \hline
- E & 2 \\
- \hline
- F & 2 \\[1ex] 
- \hline
-\end{tabular}
-\end{center}
+Answer: 
 
-Graph for movies and actors: \\
+$T(n) \le c\lg(n - 2)$ \\ 
+$T(n) \le c\lg(\lfloor n / 2 \rfloor - 2) + 1$ \\
+$T(n) = c\lg((n - 2)/2) + 1 $ \\ 
+$T(n) = c\lg(n - 2) - c\lg2 + 1 $ \\ 
+$T(n) \le c\lg(n - 2) - c\lg2 + 1 $ \\ 
+for all values of $c \ge 1 $
 
-\section*{Question 2}
+\section{Question 4.3.3}
+Question: We saw that the solution of $T(n) = 2T(\lfloor n / 2 \rfloor) + n$ is $O(n\lg n)$. Show that the solution of this recurrence is also $\Omega(n\lg n)$. Conclude that the solution is $\Theta(n\lg n)$.
 
-2. You need to take a bunch of classes at Stanford, and some of them depend on each other.
-For example, you must take CS 103 before taking CS 161. Given a set of classes you need
-to take, and information about which class is a pre-requisite for which other class, generate
-an order in which to take all of the classes. Assume you can only take one class at a time
+Answer: 
+
+Our first guess $T(n) \le cn\lg n $ \\ 
+$T(n) \le 2c(\lfloor n / 2 ) \lg (\rfloor n / 2) + n$ \\
+$T(n) \le cn \lg (n / 2) + n$\\
+$T(n) \le cn \lg n - cn \lg 2 + n$ \\
+$T(n) \le cn \lg n + (1 - c) n$ \\
+$T(n) \le cn \lg n$ \\
+for all values of $ c \ge \frac{1}{2} $
+
+Next, $T(n) \ge c(n + 2)\lg(n + 2)$ \\ 
+
+$T(n) \ge 2c(\lfloor n / 2 + 2 ) \lg (\rfloor n / 2 + 2) + n$ \\
+
+$T(n) \ge 2c(n / 2 -1 + 2 ) \lg (n / 2 -1 + 2) + n$ \\
+
+$T(n) \ge 2c(n + 2 / 2 ) \lg (n + 2 \ 2 ) + n$ \\
+
+$T(n) = c(n+2) \lg (n + 2) - c (n + 2) \lg 2 + n$ \\
+
+$T(n) = c(n+2) \lg (n + 2) + 1 (1 - c)n - 2c $ \\
+$T(n) = c(n+2) \lg (n + 2)$ \\
+
+$n \ge 2c/1-c$ for all values of $ 0 \le c \le 1$
 
 
-\section*{Answer}
-We will simply use any sorting algorithm. 
-\part*{Homework Questions}
+\section{Question 4.3.7}
+Question: Using the master method in Section 4.5, you can show that the solution to the recurrence $T(n) = 4T(n / 3) + n$ is $T(n) = \Theta(n^{\log_3 4})$. Show that a substitution proof with the assumption $T(n) \le cn^{\log_3 4}$ fails. Then show how to subtract off a lower-order term to make the substitution proof work \\
 
-\section*{Question 2}
-(a) Run DFS starting at vertex C, breaking any ties by alphabetical order. *\\
-a. What do you get when you order the vertices by ascending start time?\\
-b. What do you get when you order the vertices by descending finish time?\\
-(b) Run DFS starting at vertex C, breaking any ties by reverse alphabetical order.**\\
-a. What do you get when you order the vertices by ascending start time?\\
-b. What do you get when you order the vertices by descending finish time? 
+Answer: 
 
-\section*{Answer }
+assume $T(n) \le cn^{\log_3 4}$ \\ 
+guess $T(n) \le (cn^{\log_3 4 } ) - n$ \\
 
-\subsubsection*{(a)}
+$T(n) \le 4((cn^{\log_3 4 } ) - n )+ n$   \\
 
-a. Ascending starting time: C,D,E,A,B\\
-b. Descending finish time: A,B,C,D,E\\
-	
+$T(n) \le (cn^{\log_3 4 } - 4n + n) $ \\
 
-\subsubsection*{(b)}
-a. Ascending starting time: C,E,D,B,A\\
-b. Descending finish time: A,B,C,D,E\\
+$T(n) \le cn^{\log_3 4 }- n$ 
+
+\section{Question 4.3.8}
+Question: Using the master method in Section 4.5, you can show that the solution to the recurrence $T(n) = 4T(n / 2) + n^2$ is $T(n) = \Theta(n^2)$. Show that a substitution proof with the assumption $T(n) \le cn^2$ fails. Then show how to subtract off a lower-order term to make the substitution proof work. 
+
+Answer: 
+
+$T(n) \le 4c(n / 2)^2 + n^2$ \\ 
+
+	 $\le cn^2 + n^2 $ \\
+Guess: $T(n) \le 4c(n / 2)^2 - n/2 ) + n$\\
+
+$T(n) \le cn^2 - n$
+	 
+	 
+	 
+\section{Question 4.3.9}
+Question: Solve the recurrence $T(n) = 3T(\sqrt n) + \log n$ by making a change of variables. Your solution should be asymptotically tight. Do not worry about whether values are integral.	
+
+
+
+\section{Question 4.4.2}
+Question: Use a recursion tree to determine a good asymptotic upper bound on the recurrence $T(n) = T(n / 2) + n^2$. Use the substitution method to verify your answer. 
+
+Answer: 
+We know that there are $\lg{n}$ levels\\
+$ Sum \sum_{i=0}^{\lg n-1} (1/4)^i n^2 +1  = O(n^2) 	$ \\
+Substitution method: \\
+guess: $T(n) \le cn^2$ \\
+$ T(n) \le  c(n/2)^2 + n^2 $\\
+$ T(n) \le  c(n^2)/4 + n^2 $\\
+$ T(n) \le  (c/4+1)n^2 $\\
+$ T(n) \le  cn^2 $\\
+for all values of $c \ge 4/3$
+
+\section{Question 4.4.3}
+Question: Use a reccursion tree to determine a good asymptotic upper bound on the recurrence $T(n) = 2T(n - 1) + 1$. Use the substitution method to verify your answer.
+
+Answer: 
+Identifying the depth \\
+depth: $\lg n $ \\
+each level adds up and we get $n^2$ leaves
+
+$ T(n) \le Sum \sum_{i=0}^{\lg n-1} ((2^i n) + (2 ^{1-i}))+ \Theta(n^2) 	$ \\
+
+
+$ T(n)\le Sum \sum_{i=0}^{\lg n-1} (2^i n) + Sum \sum_{i=0}^{\lg n-1} (2 ^{1-i})+ \Theta(n^2) 	$ \\
+
+$\frac{2^(\lg n)-1 }{1} + 2 Sum \sum_{i=0}^{\lg n-1} (1/2)^i + \Theta(n^2) $\\
+
+$\Theta(n^2) + n + 3 $\\
+$\Theta(n^2) $\\
+
+Substitution method: \\
+Guess: $T(n) \le cn^2 + n$ \\
+
+$ T(n) \le 4c(n/2)^2 + 2n$\\
+
+
+$ T(n) \le cn^2 + 2n$\\
+
+$ T(n) =\Theta(n^2) $ \\
+
+
+\section{Question 4.4.4}
+
+Question: Use a reccursion tree to determine a good asymptotic upper bound on the recurrence $T(n) = 2T(n - 1) + 1$. Use the substitution method to verify your answer.
+
+Answer: depth = n \\
+each level being $2^i and 2^n$
+
+$ T(n) = Sum \sum_{i=0}^{n-1} 2^i + \Theta(2^n) 	$ \\
+Substitution method: \\
+Guess: $ T(n) \le c2^n + n$\\
+$ T(n) \le 2c2^n + (n-1) +1$ \\
+$T(n) = O(2^n)$ 
+
+
+\section{Question 4.4.5}
+
+Question: Use a reccursion tree to determine a good asymptotic upper bound on the recurrence $T(n) = T(n - 1) + T(n / 2) + n$. Use the substitution method to verify your answer.
+
+Guess: 
+$ T(n) \le c2^n - 4n$ \\
+
+$ T(n) \le c2^{n-1} - 4(n-1) + 2^{n/2}c - \frac{4n}{2} + n $\\
+$ T(n) \le c(2^{n-1}+ 2^{n/2}) - 4n -1$\\
+$ T(n) \le c(2^{n-1}+ 2^{n/2}) - 4n -1$\\ 
+$ T(n) \le c(2^{n-1}) - 4n$ \\
+$ T(n) \le c(2^n)-4n$\\
+$T(n) = O(2^n)$
+for all values of $n \ge 1/2$
+
+Guess: 
+$ T(n) \ge cn^2$ \\
+$ T(n) \ge cn^n - 2cn +1 +cn^2/4 + n$ \\
+$ T(n) \ge (2/5)cn^n +(1+2c)n +1 $ \\
+$ T(n) \ge cn^n +(1+2)n + 1$ \\
+$ T(n) \ge cn^2$
+for all values of $c \ge 1/3 $\\
+$T(n) = O(n^2)$ \\
+
+\section{Question 4.4.6}
+Question: Argue that the solution to the recurrence $T(n) = T(n / 3) + T(2n / 3) + cn$, where $c$ is a constant, is $\Omega(n\lg n)$ by appealing to the recurrsion tree.
+
+Answer: 
+We know that the cost at each level of the tree is cn. The problem has stated $T(n) = \Omega(n\lg n)$ so now we know for this we find out the lower bound. The shortest path has $log_{3}n $ levels . The solution of the recurrence is $cn\log_{3} n$ = $\Omega(n\lg n)$
+
+
+\section{Question 4.4.7}
+Question: Draw the recursion tree for $T(n) = 4T(\lfloor n / 2 \rfloor) + cn$, where $c$ is a constant, and provide a tight asymptotic bound on its solution. Verify your answer with the substitution method.
+
+Answer: Tree drawn in word document. 
+
+depth: $\lg n $ \\
+each level adds up and we get $n^2$ leaves
+
+$ T(n) \le Sum \sum_{i=0}^{\lg n-1} ((2^i cn)+ \Theta(n^2) 	$ \\
+
+
+$ T(n)\le Sum \sum_{i=0}^{\lg n-1} (2^i) + \Theta(n^2) 	$ \\
+
+$\frac{2^(\lg n)-1 }{1} + \Theta(n^2) $\\
+
+$\Theta(n^2) $\\
+Guess: $ T(n) \le cn^2 + 2cn $ \\
+$ T(n) \le 4cn^2 + 2cn + cn$ \\
+$ T(n) \le cn^2+2cn$ \\
+Guess:  $ T(n) \ge cn^2 + 2cn $ \\
+$ T(n) \ge 4cn^2 + 2cn + cn$ \\
+$ T(n) \ge cn^2+2cn$ \\
+
+\section{Question 4.5.1}
+Question: Use the master method to give tight asymptotic bounds for the following recurrences:
+
+a. $T(n) = 2T(n / 4) + 1$.
+
+b. $T(n) = 2T(n / 4) + \sqrt n$.
+
+c. $T(n) = 2T(n / 4) + n$.
+
+d. $T(n) = 2T(n / 4) + n^2$.
+
+Answer:\\
+
+a. $\Theta(n^{\log_4 2}) = \Theta(\sqrt n)$.\\
+
+b. $\Theta(n^{\log_4 2}\lg n) = \Theta(\sqrt n\lg n)$.\\
+
+c. $\Theta(n)$.\\
+
+d. $\Theta(n^2)$\\
+
+
+\section{Question 4.5.2}
+
+Question: Professor Caesar wishes to develop a matrix-multiplication algorithm that is asymptotically faster than Strassen's algorithm. His algorithm will use the divide-and-conquer method, dividing each matrix into pieces of size $n / 4 \times n / 4$, and the divide and combine steps together will take $\Theta(n^2)$ time. He needs to determine how many subproblems his algorithm has to create in order to beat Strassen's algorithm. If his algorithm creates a subproblems, then the recurrence for the running time $T(n)$ becomes $T(n) = aT(n / 4) + \Theta(n^2)$. What is the largest integer value of $a$ for which Professor Caesar's algorithm would be asymptotically faster than Strassen's algorithm?
+
+Answer: 
+
+We take the case where $a<16$ and by that we find can tell the algorithm which will be $\Theta(n^2)$.\\
+If we take a=16, in this case our algorithm will be $\Theta(n^2\log{n})$\\
+We know that the running time for Strassen's algorithm is $\Theta(n)^{\lg{7}})$ for master to be faster than Strassen, we take $log_{4} a \le \log_{2} 7$ from this we conclude $7^2$ which is equal to 49.\\
+By case 1 of the master theorem, $T(n) = \Theta (n)^(\log_{4}(48)))$\\
+
+Therefore, the largest integer value of $a$ is 48
+
+
+\section{Question 4.5.3}
+
+Question: Use the master method to show that the solution to the binary-search recurrence $T(n) = T(n / 2) + \Theta(1)$ is $T(n) = \Theta(\lg n)$.
+
+Answer\\
+a=1\\
+b=2\\
+$T(n)=\Theta(1)$ \\
+$T(n) = \Theta(\lg n)$ \\
+$T(n)=\Theta(n^{\lg 1})$\\
+
+
+\section{Question 4.5.4}
+Question: Can the master method be applied to the recurrence $T(n) = 4T(n / 2) + n^2\lg n$? Why or why not? Give an asymptotic upper bound for this recurrence.
+
+Answer: The master method cannot be applied. It is because we can see that all the 3 cases, one being, taking $a = 4$, $b = 2$, we have $f(n) = n^2\lg n \ne O(n^{2 - \epsilon}) \ne \Omega(n^{2 - \epsilon})$.\\
+
+Prove: \\
+$T(n) \le 4T(n / 2) + n^2\lg n $\\
+$4c(n / 2)^2\lg^2(n / 2) + n^2\lg n$\\
+$ cn^2\lg(n / 2)\lg n - cn^2\lg(n / 2)\lg 2 + n^2\lg n$\\
+$ cn^2\lg^2 n - cn^2\lg n\lg 2 - cn^2\lg(n / 2) + n^2\lg n$\\
+$cn^2\lg^2 n + (1 - c)n^2\lg n - cn^2\lg(n / 2)(c > 1)$\\
+$T(n)\le cn^2\lg^2 n - cn^2\lg(n / 2)$\\
+$T(n)\le cn^2\lg^2 n$\\
+
 \end{document} 
 
  
